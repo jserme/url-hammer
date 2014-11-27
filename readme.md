@@ -1,5 +1,5 @@
-# URI Hammer
-Quick and Easy URI tools
+# URL Hammer
+Quick and Easy URL tools
 
 ## Online Demo  
 http://jser.me/url-hammer/

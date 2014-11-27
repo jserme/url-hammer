@@ -50,7 +50,7 @@ var Sidebar = React.createClass({
           </div>
           <ul className="unstyled links">
               <li>
-                 <a href="https://github.com/jserme/uri-hammer"><i className="icon-github-circled"></i>Github</a>
+                 <a href="https://github.com/jserme/url-hammer"><i className="icon-github-circled"></i>Github</a>
               </li>
               <li>
                  <a href="http://weibo.com/ihubo"><i className="icon-weibo"></i>Weibo</a>
@@ -252,7 +252,7 @@ var App = React.createClass({
   getInitialState : function(){
     var url = "http://jser.me:80?from=jser&to=me#hello=world&test=1"
     var curUrlObj = urlParser.parse(location.href)
-    if(curUrlObj.fragmentObj.r) {
+    if(curUrlObj.fragmentObj && curUrlObj.fragmentObj.r) {
       url = decodeURIComponent(curUrlObj.fragmentObj.r)
     }
 

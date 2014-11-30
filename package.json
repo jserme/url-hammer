@@ -2,10 +2,11 @@
   "name": "url-hammer",
   "version": "0.0.1",
   "devDependencies": {
+    "cssmin": "^0.4.2",
     "grunt": "~0.4.2",
     "grunt-contrib-watch": "~0.5.3",
+    "grunt-exec": "^0.4.6",
     "serve": "~1.3.0",
-    "cssmin": "^0.4.2",
     "uglify-js": "^2.4.15"
   }
 }

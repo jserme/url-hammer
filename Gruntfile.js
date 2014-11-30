@@ -4,7 +4,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
       js_css_html: {
-        files: ['*.html', '**/*.js', '**/*.jsx', '**/*.css'],
+        files: ['src/*'],
+        tasks: ['exec'],
         options: {
           livereload: true
         }
@@ -12,10 +13,16 @@ module.exports = function(grunt) {
       grunt: {
         files: ['Gruntfile.js']
       }
+    },
+    exec: {
+      onlineBuild: {
+        command: './build.sh'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-exec');
 
   grunt.registerTask('default', ['watch']);
 };

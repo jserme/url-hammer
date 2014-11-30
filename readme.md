@@ -1,14 +1,14 @@
 # URL Hammer
 Quick and Easy URL tools
 
-## Online Demo  
+## Online Demo
 http://jser.me/url-hammer/
 
-## Install 
+## Install & Dev
 
 ```
 git clone https://github.com/jserme/url-hammer.git
-npm install 
+npm install
 
 ./start.sh
 ```

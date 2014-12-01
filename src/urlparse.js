@@ -1,4 +1,4 @@
-(function() {
+(function(root) {
   function unparam(query) {
     var queryObj = {}
     var kv = query.split('&')
@@ -25,26 +25,54 @@
   function parseURL(url) {
     var o = {}
 
-    var temp = url.split(/#+/)
-    if (temp[0]) {
-      o.fullpathWithQuery = temp[0]
+    var isQueryStart = false
+    var isQueryEnd = false
+    var isFragmentStart = false
+    var fullpath = ''
+    var query = ''
+    var fragment = ''
+    var cur = 0
+    var curChar
+
+    while (curChar = url.charAt(cur++)) {
+      if (curChar === '?' && !isQueryStart && !isQueryEnd) {
+        isQueryStart = true
+        continue
+      }
+
+      if (curChar == '#' && !isFragmentStart) {
+        isFragmentStart = true
+        isQueryStart = false
+        isQueryEnd = true
+        continue
+      }
+
+      if (!isQueryStart && !isFragmentStart) {
+        fullpath += curChar
+      }
+
+      if (isQueryStart && !isQueryEnd) {
+        query += curChar
+      }
+
+      if (isFragmentStart) {
+        fragment += curChar
+      }
     }
 
-    if (temp[1]) {
-      o.fragment = temp[1]
+    if (query !== '') {
+      o.query = query
+      o.queryObj = unparam(query)
+    }
+
+    o.fullpathWithQuery = query ? fullpath + '?' + query : fullpath
+
+    if (fragment !== '') {
+      o.fragment = fragment
       o.fragmentObj = unparam(o.fragment)
     }
 
-    temp = o.fullpathWithQuery.split(/\?+/)
-    if (temp[0]) {
-      o.fullpath = temp[0]
-    }
-
-    if (temp[1]) {
-      o.query = temp[1]
-      o.queryObj = unparam(o.query)
-    }
-
+    o.fullpath = fullpath
     return o
   }
 
@@ -55,31 +83,33 @@
     var fragment = []
     url += o.fullpath
 
-    if (o.queryObj) {
-      for (key in o.queryObj) {
-        querys.push(key + '=' + o.queryObj[key])
-      }
-
+    if (o.query) {
       url += '?'
-      url += querys.join('&')
+      url += o.query
     }
 
-    if (o.fragmentObj) {
-      for (key in o.fragmentObj) {
-        fragment.push(key + '=' + o.fragmentObj[key])
-      }
+    if (o.fragment) {
       url += '#'
-      url += fragment.join('&')
+      url += o.fragment
     }
 
     return url
   }
 
-  window.urlParser = {
+  var urlParser = {
     parse: parseURL,
     format: formatURL
   }
-})()
 
-
-//console.log(formatURL(parseURL('http://jser.me:80?from=jser&to=me&from=123#hello=world&test=1')))
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = urlParser;
+  } else {
+    if (typeof define === 'function' && define.amd) {
+      define([], function() {
+        return urlParser;
+      });
+    } else {
+      root.urlParser = urlParser;
+    }
+  }
+}).call(this)

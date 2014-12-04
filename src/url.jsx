@@ -34,9 +34,15 @@ var AutoResizeInput = React.createClass({
 
     input.style.height = 'auto'
     input.style.height = input.scrollHeight + 'px'
+
+    var nodeValLen = input.value.length
+    if(input.setSelectionRange){
+      input.setSelectionRange(nodeValLen, nodeValLen)
+      input.focus()
+    }
   },
   render : function(){
-    return <textarea className="input"  onChange={this.inputChange} placeholder={this.props.placeholder} value={this.props.value}></textarea>
+    return <textarea className="input" onChange={this.inputChange} placeholder={this.props.placeholder} value={this.props.value}></textarea>
   }
 })
 
@@ -69,7 +75,7 @@ var UrlInput = React.createClass({
   render : function() {
     return (
       <div className="url-input">
-        <AutoResizeInput inputChange={this.inputChange}  placeholder="Type or paste a url here.." value={this.props.initUrl}/>
+        <AutoResizeInput  inputChange={this.inputChange}  placeholder="Type or paste a url here.." value={this.props.initUrl}/>
       </div>
     )
   }
@@ -141,7 +147,7 @@ var DisplayPanel = React.createClass({
     if(this.state.showEditForm) {
       editForm = (
         <form className="displayPanel-edit-form">
-          <label >key: </label><input ref="key" type="text"/>
+          <label >key: </label><input autoFocus ref="key" type="text"/>
           <br />
           <label >val: </label><input ref="val" type="text" />
           <br />
@@ -289,7 +295,6 @@ var App = React.createClass({
 
     this.remberCurUrl(url)
   },
-
   render: function(){
     return (
       <div className="container-fluid">

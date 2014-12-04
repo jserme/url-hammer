@@ -112,4 +112,4 @@
       root.urlParser = urlParser;
     }
   }
-}).call(this)
+})(this)

@@ -76,6 +76,17 @@
     return o
   }
 
+  function isEmptyObj(obj) {
+    var rst = true
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        rst = false
+        break
+      }
+    }
+    return rst
+  }
+
   function formatURL(o) {
     var url = ''
     var key
@@ -83,14 +94,22 @@
     var fragment = []
     url += o.fullpath
 
-    if (o.query) {
+    if (o.queryObj && !isEmptyObj(o.queryObj)) {
       url += '?'
-      url += o.query
+      for (key in o.queryObj) {
+        querys.push(key + '=' + o.queryObj[key])
+      }
+
+      url += querys.join('&')
     }
 
-    if (o.fragment) {
+    if (o.fragmentObj && !isEmptyObj(o.fragmentObj)) {
       url += '#'
-      url += o.fragment
+      for (key in o.fragmentObj) {
+        fragment.push(key + '=' + o.fragmentObj[key])
+      }
+
+      url += fragment.join('&')
     }
 
     return url

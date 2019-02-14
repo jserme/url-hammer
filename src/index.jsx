@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { render } from 'react-dom'
 import { urlParser } from './urlparse'
 import './style.css'
-import { Sidebar } from './Sidebar'
-import { Content } from './Content'
+import { Sidebar } from './components/Sidebar'
+import { Content } from './components/Content'
 
 const App = () => {
   var url = 'http://jser.me:80?from=jser&to=me#hello=world&test=1'

@@ -1,9 +1,10 @@
+/* eslint-env mocha */
 var urlParser = require('../src/urlparse.js')
 var should = require('should')
 
-describe('urlparse', function() {
-  describe('parse', function() {
-    it('normal url', function() {
+describe('urlparse', function () {
+  describe('parse', function () {
+    it('normal url', function () {
       urlParser.parse('http://jser.me:80?from=jser&to=me#hello=world&test=1')
         .should.eql({
           fullpath: 'http://jser.me:80',
@@ -16,7 +17,7 @@ describe('urlparse', function() {
           },
           fragmentObj: {
             hello: 'world',
-            test:'1'
+            test: '1'
           }
         })
 
@@ -32,12 +33,12 @@ describe('urlparse', function() {
           },
           fragmentObj: {
             hello: 'world',
-            test:'1'
+            test: '1'
           }
         })
     })
 
-    it('no fragment', function() {
+    it('no fragment', function () {
       urlParser.parse('http://jser.me:80?from=jser&to=me&to=lili')
         .should.eql({
           fullpath: 'http://jser.me:80',
@@ -50,7 +51,7 @@ describe('urlparse', function() {
         })
     })
 
-    it('no query', function() {
+    it('no query', function () {
       urlParser.parse('http://jser.me:80#hello=world&test=1')
         .should.eql({
           fullpath: 'http://jser.me:80',
@@ -58,13 +59,12 @@ describe('urlparse', function() {
           fullpathWithQuery: 'http://jser.me:80',
           fragmentObj: {
             hello: 'world',
-            test:'1'
+            test: '1'
           }
         })
     })
 
-
-    it('two # url', function() {
+    it('two # url', function () {
       urlParser.parse('http://jser.me:80?from=jser&to=me#hello=world#&test=1')
         .should.eql({
           fullpath: 'http://jser.me:80',
@@ -77,13 +77,12 @@ describe('urlparse', function() {
           },
           fragmentObj: {
             hello: 'world#',
-            test:'1'
+            test: '1'
           }
         })
-
     })
 
-    it('two ? url', function() {
+    it('two ? url', function () {
       urlParser.parse('http://jser.me:80?from=jser?&to=me#hello=world&test=1')
         .should.eql({
           fullpath: 'http://jser.me:80',
@@ -96,14 +95,14 @@ describe('urlparse', function() {
           },
           fragmentObj: {
             hello: 'world',
-            test:'1'
+            test: '1'
           }
         })
     })
   })
 
-  describe('format', function() {
-    it('normal url', function() {
+  describe('format', function () {
+    it('normal url', function () {
       urlParser.format({
         fullpath: 'http://jser.me:80',
         fragment: 'hello=world#&test=1',
@@ -115,7 +114,7 @@ describe('urlparse', function() {
         },
         fragmentObj: {
           hello: 'world#',
-          test:'1'
+          test: '1'
         }
       }).should.eql('http://jser.me:80?from=jser&to=me#hello=world#&test=1')
     })

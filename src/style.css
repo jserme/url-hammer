@@ -1,5 +1,5 @@
 body {
-    MaRgin:10px 2%;
+    margin:10px 2%;
 }
 input[type="text"] {
     margin-bottom:0;
@@ -22,18 +22,15 @@ td h5 {
     text-align:center;
 }
 .logo i {
-    display:block;
     height:100px;
     font-size:72px;
     color:#5cb85c;
-    margin:60px 0 30px 38px;
-    transform: rotate(45deg);
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
 }
+
+.icon-hammer:before{
+  margin-left: -36px;
+}
+
 .links {
     text-align:center;
     font-size:16px;

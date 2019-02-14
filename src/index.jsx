@@ -160,7 +160,7 @@ const DisplayPanel = ({ onChange, onDelete, onAdd, data, name }) => {
   )
 }
 
-const Content = ({ onChange, urlObj }) => {
+const Content = ({ onChange, urlObj, initUrl, inputChange }) => {
   const onFullPathChange = (evt) => {
     urlObj.fullpath = evt.target.value
     onChange(urlObj)
@@ -208,7 +208,7 @@ const Content = ({ onChange, urlObj }) => {
 
   return (
     <div className='span10 content'>
-      <UrlInput {...{ onChange, urlObj }} />
+      <UrlInput {...{ inputChange, initUrl }} />
       <InEdit
         value={urlObj.fullpath}
         onChange={onFullPathChange}
@@ -247,7 +247,7 @@ const App = () => {
 
   const inputChange = (val) => {
     var urlObj
-    if (val == '') {
+    if (val === '') {
       urlObj = {}
     } else {
       urlObj = urlParser.parse(val)
@@ -277,7 +277,6 @@ const App = () => {
       <div className='row-fluid' >
         <Sidebar />
         <Content
-          // paramsChange={onParamsChange}
           onChange={onChange}
           initUrl={urlState.url}
           urlObj={urlState.urlObj}

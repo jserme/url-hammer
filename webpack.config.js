@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   mode: 'development',
   entry: [
     './src/index.jsx'
